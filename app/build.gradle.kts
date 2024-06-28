@@ -33,6 +33,11 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    //agrego dependencia para poder usar viewBinding
+    viewBinding {
+        enable = true
+    }
 }
 
 dependencies {

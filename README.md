@@ -1,1 +1,1 @@
-proyecto con MVVM y buenas prácticas
+proyecto con MVVM y clean architecture
