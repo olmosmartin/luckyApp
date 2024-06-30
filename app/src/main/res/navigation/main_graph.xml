@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/horoscopoFragment">
+
+    <fragment
+        android:id="@+id/horoscopoFragment"
+        android:name="com.example.luckyapp.ui.horoscopo.HoroscopoFragment"
+        android:label="fragment_horoscopo"
+        tools:layout="@layout/fragment_horoscopo" />
+    <fragment
+        android:id="@+id/manoFragment"
+        android:name="com.example.luckyapp.ui.mano.ManoFragment"
+        android:label="fragment_mano"
+        tools:layout="@layout/fragment_mano" />
+    <fragment
+        android:id="@+id/suerteFragment"
+        android:name="com.example.luckyapp.ui.suerte.SuerteFragment"
+        android:label="fragment_suerte"
+        tools:layout="@layout/fragment_suerte" />
+</navigation>
