@@ -7,7 +7,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.luckyapp.R
 import com.example.luckyapp.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding //nombre de la clase con activity al inicio y binding al final
     private lateinit var navController: NavController
@@ -26,7 +28,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initNavigation() {
         //inicio la navegacion con el id del FragmentContainerView y lo casteo a NavHostFragment
-        val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navHost =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHost.navController
         binding.bottonNavigation.setupWithNavController(navController)
     }

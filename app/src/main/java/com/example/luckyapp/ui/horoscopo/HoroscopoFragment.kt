@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.luckyapp.databinding.FragmentHoroscopoBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HoroscopoFragment : Fragment() {
 
     private var _binding: FragmentHoroscopoBinding? = null

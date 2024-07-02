@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.luckyapp.databinding.FragmentSuerteBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SuerteFragment : Fragment() {
 
     private var _binding: FragmentSuerteBinding? = null
