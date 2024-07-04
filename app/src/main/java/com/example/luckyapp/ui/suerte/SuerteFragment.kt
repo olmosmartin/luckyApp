@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.example.luckyapp.databinding.FragmentSuerteBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SuerteFragment : Fragment() {
 
+    private val suerteViewModel by viewModels<SuerteViewModel>()
     private var _binding: FragmentSuerteBinding? = null
     private val binding get() = _binding!!
 
