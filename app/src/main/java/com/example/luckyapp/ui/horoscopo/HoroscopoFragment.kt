@@ -10,7 +10,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.luckyapp.databinding.FragmentHoroscopoBinding
+import com.example.luckyapp.domain.model.HoroscopoInfo
+import com.example.luckyapp.ui.horoscopo.adapter.HoroscopoAdaptervar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.launch
@@ -21,6 +25,7 @@ class HoroscopoFragment : Fragment() {
     private val horoscopoViewModel by viewModels<HoroscopoViewModel>()
     private var _binding: FragmentHoroscopoBinding? = null
     private val binding get() = _binding!!
+    private lateinit var horoscopoAdapter: HoroscopoAdaptervar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +40,7 @@ class HoroscopoFragment : Fragment() {
     }
 
     private fun initUI() {
+        initRecyclerView()
         initUIState()
     }
 
@@ -45,10 +51,27 @@ class HoroscopoFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 horoscopoViewModel.horoscopo.collect { listHoroscopoInfo ->
                     //cada vez q modifique _horoscopo.value en HoroscopoViewModel se va ejecutar este codigo:
-                    Log.i("HoroscopoFragment", "initUIState: " + listHoroscopoInfo.toString())
+                    horoscopoAdapter.updateList(listHoroscopoInfo)
                 }
             }
         }
+    }
+
+    private fun initRecyclerView() {
+        //por defecto en HoroscopoAdaptervar queda lista vacia si no envía nada al constructor
+        horoscopoAdapter = HoroscopoAdaptervar()
+
+        //le paso dos columnas en lugar de usar LinearLayoutManager
+        binding.rvHoroscopoList.layoutManager = GridLayoutManager(context, 2)
+        binding.rvHoroscopoList.adapter = horoscopoAdapter
+
+        /*
+            otra forma:
+            binding.rvHoroscopoList.apply {
+                adapter = horoscopoAdapter
+                layoutManager = LinearLayoutManager(context)
+            }
+        */
     }
 
     override fun onDestroyView() {
