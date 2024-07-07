@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.luckyapp.R
 import com.example.luckyapp.domain.model.HoroscopoInfo
 
-class HoroscopoAdaptervar(var horoscopoList: List<HoroscopoInfo> = emptyList()) :
+class HoroscopoAdaptervar(var horoscopoList: List<HoroscopoInfo> = emptyList(), private var onHoroscopoSelected: (HoroscopoInfo) -> Unit) :
     RecyclerView.Adapter<HoroscopoViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HoroscopoViewHolder {
         val view =
@@ -19,7 +19,7 @@ class HoroscopoAdaptervar(var horoscopoList: List<HoroscopoInfo> = emptyList()) 
     }
 
     override fun onBindViewHolder(holder: HoroscopoViewHolder, position: Int) {
-        holder.render(horoscopoList[position])
+        holder.render(horoscopoList[position], onHoroscopoSelected)
     }
 
     fun updateList(horoscopoList: List<HoroscopoInfo>) {

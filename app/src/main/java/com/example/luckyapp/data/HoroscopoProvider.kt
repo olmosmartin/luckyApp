@@ -5,7 +5,7 @@ import javax.inject.Inject
 
 class HoroscopoProvider @Inject constructor() {
 
-    public fun getHoroscopo(): List<HoroscopoInfo> {
+    fun getHoroscopo(): List<HoroscopoInfo> {
 
         return listOf(
             HoroscopoInfo.Aries,

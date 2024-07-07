@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -59,7 +60,9 @@ class HoroscopoFragment : Fragment() {
 
     private fun initRecyclerView() {
         //por defecto en HoroscopoAdaptervar queda lista vacia si no envía nada al constructor
-        horoscopoAdapter = HoroscopoAdaptervar()
+        horoscopoAdapter = HoroscopoAdaptervar(onHoroscopoSelected = { horoscopoInfo ->
+            Toast.makeText(context, getString(horoscopoInfo.name), Toast.LENGTH_SHORT).show()
+        })
 
         //le paso dos columnas en lugar de usar LinearLayoutManager
         binding.rvHoroscopoList.layoutManager = GridLayoutManager(context, 2)
