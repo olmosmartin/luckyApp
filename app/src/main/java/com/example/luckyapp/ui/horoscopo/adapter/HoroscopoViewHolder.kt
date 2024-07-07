@@ -27,12 +27,27 @@ class HoroscopoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     }
 
     private fun animation(view: View, lambda: () -> Unit) {
+        /*
+        * la parte de cancelar la animacion y de reestablecer la vista a su estado inicial es necesaria
+        * porque si no se hace la imagen se rompe con un press antes de que termine la animacion ya que
+        * la animacion se inicia sin antes terminar y el estado final queda
+        * con 360 grados de vuelta pero desde una cantidad de grados ya aplicada sobre el view
+        */
+
+        // Cancelar la animación anterior si está en curso
+        view.animate().cancel()
+
+        // Restablecer la vista a su estado inicial
+        view.rotationY = 0f
+        view.rotationX = 0f
+
+        // Iniciar la nueva animación
         view.animate().apply {
             duration = 500
             interpolator = LinearInterpolator()
             rotationYBy(360f)
             rotationXBy(360f)
-            //acá dice qué ejecuta cuando la animación termina
+            // Acá dice qué ejecuta cuando la animación termina
             withEndAction(lambda)
             start()
         }
