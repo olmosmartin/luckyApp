@@ -14,10 +14,23 @@
         android:id="@+id/horoscopoFragment"
         android:name="com.example.luckyapp.ui.horoscopo.HoroscopoFragment"
         android:label="fragment_horoscopo"
-        tools:layout="@layout/fragment_horoscopo" />
+        tools:layout="@layout/fragment_horoscopo" >
+        <action
+            android:id="@+id/action_horoscopoFragment_to_horoscopoDetalle"
+            app:destination="@id/horoscopoDetalle" />
+    </fragment>
     <fragment
         android:id="@+id/suerteFragment"
         android:name="com.example.luckyapp.ui.suerte.SuerteFragment"
         android:label="fragment_suerte"
         tools:layout="@layout/fragment_suerte" />
+    <activity
+        android:id="@+id/horoscopoDetalle"
+        android:name="com.example.luckyapp.ui.hoscopoDetalle.HoroscopoDetalleActivity"
+        android:label="activity_horoscopo_detalle"
+        tools:layout="@layout/activity_horoscopo_detalle" >
+        <argument
+            android:name="HoroscopoTipo"
+            app:argType="com.example.luckyapp.domain.model.HoroscopoEnum" />
+    </activity>
 </navigation>

@@ -5,6 +5,9 @@ plugins {
     //agrego plugins para dagger hilt y kapt
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+
+    //agrego plugins para navegacion
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {

@@ -16,10 +16,10 @@
     <string name="leo">Leo</string>
     <string name="virgo">Virgo</string>
     <string name="libra">Libra</string>
-    <string name="scorpio">Scorpio</string>
+    <string name="scorpio">Escorpio</string>
     <string name="sagittarius">Sagitario</string>
     <string name="capricorn">Capricornio</string>
-    <string name="aquarius">Aquario</string>
+    <string name="aquarius">Acuario</string>
     <string name="piscis">Piscis</string>
 
 </resources>

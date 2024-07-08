@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.luckyapp.databinding.FragmentHoroscopoBinding
@@ -62,6 +63,12 @@ class HoroscopoFragment : Fragment() {
         //por defecto en HoroscopoAdaptervar queda lista vacia si no envía nada al constructor
         horoscopoAdapter = HoroscopoAdaptervar(onHoroscopoSelected = { horoscopoInfo ->
             Toast.makeText(context, getString(horoscopoInfo.name), Toast.LENGTH_SHORT).show()
+            findNavController().navigate(
+                // HoroscopoFragmentDirections es la clase que genera cuando instalo la libreria navigation.safeargs
+                // y refiere a el fragment adentro de res/navigation/main_graph y
+                // actionHoroscopoFragmentToHoroscopoDetalle es el id autogenerado de la action: action_horoscopoFragment_to_horoscopoDetalle
+                HoroscopoFragmentDirections.actionHoroscopoFragmentToHoroscopoDetalle(horoscopoInfo.tipo)
+            )
         })
 
         //le paso dos columnas en lugar de usar LinearLayoutManager
