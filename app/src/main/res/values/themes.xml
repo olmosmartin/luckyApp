@@ -3,7 +3,19 @@
     <style name="Base.Theme.LuckyApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:statusBarColor">@color/secondary</item>
     </style>
 
     <style name="Theme.LuckyApp" parent="Base.Theme.LuckyApp" />
+
+    <style name="tvTitle">
+        <item name="android:fontFamily">@font/tangerine_bold</item>
+        <item name="android:textColor">@color/secondary</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="tvContent" parent="tvTitle">
+        <item name="android:textSize">23sp</item>
+    </style>
+
 </resources>

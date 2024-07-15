@@ -4,6 +4,6 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android) apply false
     // plugin para dagger hilt
     id("com.google.dagger.hilt.android") version "2.48" apply false
-    // plugin para navigation
+    // plugin para agregar argumentos en la navigation
     id("androidx.navigation.safeargs.kotlin") version "2.7.7" apply false
 }
