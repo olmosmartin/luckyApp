@@ -15,7 +15,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:background="@color/red" />
+        tools:src="@drawable/detail_gemini" />
+
+    <ImageView
+        android:id="@+id/btnBabackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/gold" />
 
     <TextView
         android:id="@+id/tvHoroscopoDetalle"
@@ -33,6 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         android:background="@color/black_alpha"
+        android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
