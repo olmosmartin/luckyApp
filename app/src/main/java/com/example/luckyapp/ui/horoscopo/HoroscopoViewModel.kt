@@ -1,10 +1,8 @@
 package com.example.luckyapp.ui.horoscopo
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.example.luckyapp.data.HoroscopoProvider
+import com.example.luckyapp.data.providers.HoroscopoProvider
 import com.example.luckyapp.domain.model.HoroscopoInfo
-import com.example.luckyapp.domain.model.HoroscopoInfo.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

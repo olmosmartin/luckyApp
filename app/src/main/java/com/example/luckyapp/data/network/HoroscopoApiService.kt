@@ -8,6 +8,6 @@ import retrofit2.http.Path
 interface HoroscopoApiService {
 
     @GET("{sign}")
-    suspend fun getDetailByname(@Path("sign") sign: String): Response<HoroscopoRespuesta>
+    suspend fun getDetailByname(@Path("sign") sign: String): HoroscopoRespuesta
 
 }

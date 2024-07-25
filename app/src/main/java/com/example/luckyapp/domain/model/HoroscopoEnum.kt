@@ -2,15 +2,15 @@ package com.example.luckyapp.domain.model
 
 enum class HoroscopoEnum {
     Aries,
-    Tauro,
-    Geminis,
+    Taurus,
+    Gemini,
     Cancer,
     Leo,
     Virgo,
     Libra,
-    Escorpio,
-    Sagitario,
-    Capricornio,
-    Acuario,
-    Piscis
+    Scorpio,
+    Sagittarius,
+    Capricorn,
+    Aquarius,
+    Pisces
 }

@@ -38,6 +38,7 @@
         tools:text="Horoscopo" />
 
     <TextView
+        android:id="@+id/tvContent"
         style="@style/tvContent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

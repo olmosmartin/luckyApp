@@ -24,6 +24,8 @@ class HoroscopoDetalleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHoroscopoDetalleBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        horoscopoDetalleViewModel.getDetalle(args.HoroscopoTipo.name)
         initUI()
     }
 
@@ -37,7 +39,7 @@ class HoroscopoDetalleActivity : AppCompatActivity() {
                     when(horoscopoDetalleState) {
                         is HoroscopoDetalleState.Error -> errorState()
                         HoroscopoDetalleState.Loading -> loadingState()
-                        is HoroscopoDetalleState.Success -> successState()
+                        is HoroscopoDetalleState.Success -> successState(horoscopoDetalleState)
                     }
                 }
             }
@@ -48,10 +50,13 @@ class HoroscopoDetalleActivity : AppCompatActivity() {
         binding.pbLoading.visibility = View.VISIBLE
     }
     private fun errorState() {
-        TODO("Not yet implemented")
+        binding.pbLoading.visibility = View.GONE
     }
-    private fun successState() {
-        TODO("Not yet implemented")
+    private fun successState(horoscopoDetalleState: HoroscopoDetalleState.Success) {
+        binding.pbLoading.visibility = View.GONE
+        binding.tvContent.text = horoscopoDetalleState.data
+        binding.tvHoroscopoDetalle.text = args.HoroscopoTipo.name
+        Log.i("horoscopo statevm", "successState: " + horoscopoDetalleState.data)
     }
 
 }
