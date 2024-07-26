@@ -30,13 +30,19 @@ class HoroscopoDetalleActivity : AppCompatActivity() {
     }
 
     private fun initUI() {
+        //inicio los listeners:
+        binding.btnBabackButton.setOnClickListener {
+            //pongo para volver a la pantalla anterior:
+            onBackPressed()
+        }
+
         //creo una corrutina lifecycleScope que sirve en los fragments y activity para lanzar corrutinas
         //que se ejecuten en el ciclo de vida del fragment, muriendo cuando muera el fragment
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 horoscopoDetalleViewModel.state.collect { horoscopoDetalleState ->
-                    Log.i("horoscopo detyalle activity statevm", "initui: "+horoscopoDetalleState)
-                    when(horoscopoDetalleState) {
+                    Log.i("horoscopo detyalle activity statevm", "initui: " + horoscopoDetalleState)
+                    when (horoscopoDetalleState) {
                         is HoroscopoDetalleState.Error -> errorState()
                         HoroscopoDetalleState.Loading -> loadingState()
                         is HoroscopoDetalleState.Success -> successState(horoscopoDetalleState)
@@ -49,9 +55,11 @@ class HoroscopoDetalleActivity : AppCompatActivity() {
     private fun loadingState() {
         binding.pbLoading.visibility = View.VISIBLE
     }
+
     private fun errorState() {
         binding.pbLoading.visibility = View.GONE
     }
+
     private fun successState(horoscopoDetalleState: HoroscopoDetalleState.Success) {
         binding.pbLoading.visibility = View.GONE
         binding.tvContent.text = horoscopoDetalleState.data
