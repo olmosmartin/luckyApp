@@ -9,7 +9,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.navArgs
+import com.example.luckyapp.R
 import com.example.luckyapp.databinding.ActivityHoroscopoDetalleBinding
+import com.example.luckyapp.domain.model.HoroscopoEnum
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -25,7 +27,7 @@ class HoroscopoDetalleActivity : AppCompatActivity() {
         binding = ActivityHoroscopoDetalleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        horoscopoDetalleViewModel.getDetalle(args.HoroscopoTipo.name)
+        horoscopoDetalleViewModel.getDetalle(args.HoroscopoTipo)
         initUI()
     }
 
@@ -64,7 +66,27 @@ class HoroscopoDetalleActivity : AppCompatActivity() {
         binding.pbLoading.visibility = View.GONE
         binding.tvContent.text = horoscopoDetalleState.data
         binding.tvHoroscopoDetalle.text = args.HoroscopoTipo.name
+
+
+        binding.ivHoroscopoDetalle.setImageResource(getimageByHoroscopoEnum(horoscopoDetalleState.horoscopoEnum))
         Log.i("horoscopo statevm", "successState: " + horoscopoDetalleState.data)
+    }
+
+    private fun getimageByHoroscopoEnum(horoscopo: HoroscopoEnum): Int {
+        return when(horoscopo){
+            HoroscopoEnum.Aries -> R.drawable.detail_aries
+            HoroscopoEnum.Taurus -> R.drawable.detail_taurus
+            HoroscopoEnum.Gemini -> R.drawable.detail_gemini
+            HoroscopoEnum.Cancer -> R.drawable.detail_cancer
+            HoroscopoEnum.Leo -> R.drawable.detail_leo
+            HoroscopoEnum.Virgo -> R.drawable.detail_virgo
+            HoroscopoEnum.Libra -> R.drawable.detail_libra
+            HoroscopoEnum.Scorpio -> R.drawable.detail_scorpio
+            HoroscopoEnum.Sagittarius -> R.drawable.detail_sagittarius
+            HoroscopoEnum.Capricorn -> R.drawable.detail_capricorn
+            HoroscopoEnum.Aquarius -> R.drawable.detail_aquarius
+            HoroscopoEnum.Pisces -> R.drawable.detail_pisces
+        }
     }
 
 }

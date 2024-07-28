@@ -2,6 +2,8 @@ package com.example.luckyapp.ui.hoscopoDetalle
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.luckyapp.domain.model.HoroscopoEnum
+import com.example.luckyapp.domain.model.HoroscopoModel
 import com.example.luckyapp.domain.usecase.GetDetalleSigno
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -20,20 +22,23 @@ class HoroscopoDetalleViewModel @Inject constructor(private val getDetalleSigno:
     private var _state = MutableStateFlow<HoroscopoDetalleState>(HoroscopoDetalleState.Loading)
     val state: StateFlow<HoroscopoDetalleState> = _state
 
+    lateinit var horoscopo: HoroscopoEnum
+
     //este metodo se llama cuando se crea el viewmodel, es como un oncreate
 //    init {
 //    }
 
-    fun getDetalle(sign: String) {
+    fun getDetalle(sign: HoroscopoEnum) {
+        horoscopo = sign
         viewModelScope.launch {
             _state.value = HoroscopoDetalleState.Loading
             //uso el hilo secundario para los llamando de retrofit para no tildar el hilo principal que se usa para la ui
             // porque por defecto viewModelScope.launch usa el hilo principal
             val result  = withContext(Dispatchers.IO){
-                getDetalleSigno(sign)
+                getDetalleSigno(sign.name)
             }
             if (result!=null){
-                _state.value = HoroscopoDetalleState.Success(result.horoscope)
+                _state.value = HoroscopoDetalleState.Success(result.horoscope, horoscopo)
             } else {
                 _state.value = HoroscopoDetalleState.Error("Ocurrió un error")
             }
