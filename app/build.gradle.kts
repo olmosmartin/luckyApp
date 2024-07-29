@@ -25,12 +25,29 @@ android {
     }
 
     buildTypes {
-        release {
+        getByName("release") {
             isMinifyEnabled = false
+            isDebuggable = false
+            //cambio el nombre de la app en release
+            resValue("string", "app_name", "Lucky App")
+
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "BASE_URL", "\"https://newastro.vercel.app/\"")
+        }
+        getByName("debug") {
+            isDebuggable = true
+            //cambio el nombre de la app en debug
+            resValue("string", "app_name", "[DEBUG] - Lucky App")
+
+            //tambien puedo crear valores que no existen en values/strings.xml
+            //y se usa igual: @string/nuevo_valor en el manifest para accederlos
+            resValue("string", "nuevo_valor", "debug nuevo valor")
+
+            //TODO: crear base url para debug
+            buildConfigField("String", "BASE_URL", "\"https://newastro.vercel.app/\"")
         }
     }
     compileOptions {
@@ -42,8 +59,12 @@ android {
     }
 
     //agrego dependencia para poder usar viewBinding
-    viewBinding {
-        enable = true
+//    viewBinding {
+//        enable = true
+//    }
+    buildFeatures {
+        viewBinding = true
+        buildConfig = true
     }
 }
 

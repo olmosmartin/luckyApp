@@ -1,5 +1,6 @@
 package com.example.luckyapp.data.network
 
+import com.example.luckyapp.BuildConfig.BASE_URL
 import com.example.luckyapp.data.RepositoryImp
 import com.example.luckyapp.data.core.interceptor.AuthInterceptor
 import com.example.luckyapp.domain.Repository
@@ -23,7 +24,7 @@ object NetworkModule {
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit
             .Builder()
-            .baseUrl("https://newastro.vercel.app/")
+            .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
