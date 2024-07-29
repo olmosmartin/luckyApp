@@ -1,11 +1,14 @@
 package com.example.luckyapp.data.network
 
 import com.example.luckyapp.data.RepositoryImp
+import com.example.luckyapp.data.core.interceptor.AuthInterceptor
 import com.example.luckyapp.domain.Repository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -17,11 +20,23 @@ object NetworkModule {
     //proveo un Retrofit
     @Provides
     @Singleton
-    fun provideRetrofit(): Retrofit {
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit
             .Builder()
             .baseUrl("https://newastro.vercel.app/")
+            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(authInterceptor: AuthInterceptor):OkHttpClient{
+        val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        return OkHttpClient
+            .Builder()
+            .addInterceptor(authInterceptor)
+            .addInterceptor(interceptor)
             .build()
     }
 

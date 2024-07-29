@@ -1,7 +1,6 @@
 package com.example.luckyapp.ui.hoscopoDetalle
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -43,7 +42,6 @@ class HoroscopoDetalleActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 horoscopoDetalleViewModel.state.collect { horoscopoDetalleState ->
-                    Log.i("horoscopo detyalle activity statevm", "initui: " + horoscopoDetalleState)
                     when (horoscopoDetalleState) {
                         is HoroscopoDetalleState.Error -> errorState()
                         HoroscopoDetalleState.Loading -> loadingState()
@@ -66,10 +64,7 @@ class HoroscopoDetalleActivity : AppCompatActivity() {
         binding.pbLoading.visibility = View.GONE
         binding.tvContent.text = horoscopoDetalleState.data
         binding.tvHoroscopoDetalle.text = args.HoroscopoTipo.name
-
-
         binding.ivHoroscopoDetalle.setImageResource(getimageByHoroscopoEnum(horoscopoDetalleState.horoscopoEnum))
-        Log.i("horoscopo statevm", "successState: " + horoscopoDetalleState.data)
     }
 
     private fun getimageByHoroscopoEnum(horoscopo: HoroscopoEnum): Int {
