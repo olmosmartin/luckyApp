@@ -1,6 +1,9 @@
 package com.example.luckyapp.ui.suerte
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -17,7 +20,10 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.example.luckyapp.R
 import com.example.luckyapp.databinding.FragmentSuerteBinding
+import com.example.luckyapp.ui.code.listeners.OnSwipeTouchListener
+import com.example.luckyapp.ui.suerte.provider.RandomCardProvider
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SuerteFragment : Fragment() {
@@ -25,6 +31,10 @@ class SuerteFragment : Fragment() {
     private val suerteViewModel by viewModels<SuerteViewModel>()
     private var _binding: FragmentSuerteBinding? = null
     private val binding get() = _binding!!
+
+    //puedo injectar a una variable directo porque tengo @AndroidEntryPoint
+    @Inject
+    lateinit var randomCardProvider: RandomCardProvider
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,14 +49,56 @@ class SuerteFragment : Fragment() {
     }
 
     private fun initUI() {
+        preparePrediction()
         initListeners()
     }
 
-    private fun initListeners() {
-        binding.ivRuleta.setOnClickListener {
-            Log.i("lucky", "click ruleta")
-            spinAnimation(it)
+    private fun preparePrediction() {
+        val suerte = randomCardProvider.getSuerte()
+        //si pongo el signo de pregunta y el .let me garantizo que no sea nulo
+        suerte?.let {suerte ->
+            val suerteActual = getString(suerte.text)
+            binding.tvLucky.text = suerteActual
+            binding.ivLuckyCard.setImageResource(suerte.image)
+            binding.tvShare.setOnClickListener {view ->
+                shareSuerte(suerteActual)
+            }
         }
+    }
+
+    private fun shareSuerte(prediccion: String) {
+        //Implemento un intent para compartir la prediccion
+        val sendIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, prediccion)
+            type = "text/plain"
+        }
+
+        // Crear el intent para compartir
+        val sharedIntent = Intent.createChooser(sendIntent, null)
+        // Iniciar la actividad de compartir
+        startActivity(sharedIntent)
+
+        //tambien se pueden crear otros Intent para ejecutar la cámara por ejemplo
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initListeners() {
+        //para activar la ruleta con un click
+//        binding.ivRuleta.setOnClickListener {
+//            spinAnimation(it)
+//        }
+
+        //para activar la ruleta deslizando la pantalla
+        binding.ivRuleta.setOnTouchListener(object: OnSwipeTouchListener(requireContext()) {
+            override fun onSwipeRight() {
+                spinAnimation(binding.ivRuleta)
+            }
+
+            override fun onSwipeLeft() {
+                spinAnimation(binding.ivRuleta)
+            }
+        })
     }
 
     private fun spinAnimation(view: View) {
