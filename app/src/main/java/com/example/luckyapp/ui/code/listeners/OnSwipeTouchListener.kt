@@ -5,6 +5,9 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 
+/*
+    esta clase sirve para detectar cuando se hace un gesto de swipe
+ */
 open class OnSwipeTouchListener(context: Context) : View.OnTouchListener {
 
     companion object {
